@@ -17,7 +17,7 @@ function draw() {
     lantern.display();
     lantern.move();
   }
-  
+  //Display particles 
   for (let particle of particles) {
         particle.update();
         particle.display();
@@ -71,20 +71,27 @@ class Lantern {
 
 class Particle {
       constructor() {
+        //Set initial position to a certain point in the canvas
         this.position = createVector(random(width), random(height));
+        //Set velocity to a random vector 
         this.velocity = createVector(random(-1, 1), random(-1, 1));
+        //Set color with a little bit of transparency
         this.color = color(random(200, 255), random(100, 200), random(150, 255), 150);
+        //Set random size for particles 
         this.size = random(5, 15);
       }
 
       update() {
         this.position.add(this.velocity);
-
+        
+        //Update position based on its velocity (x)
         if (this.position.x > width || this.position.x < 0) {
+  // Reverse the horizontal velocity to keep the particle within bounds
           this.velocity.x *= -1;
         }
-
+        //Update position based on its velocity (y)
         if (this.position.y > height || this.position.y < 0) {
+  // Reverse the verticle velocity to keep the particle within bounds
           this.velocity.y *= -1;
         }
       }
